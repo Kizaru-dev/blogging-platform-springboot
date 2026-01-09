@@ -14,71 +14,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom Netflix Theme -->
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Custom Theme (Cache Busted) -->
+    <link rel="stylesheet" th:href="@{/css/style.css?v=2.1}">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand" href="/">DevBlog</a>
+            <a class="navbar-brand" href="/">DEVBLOG</a>
         </div>
     </nav>
 
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <!-- Bootstrap Dark Card for the Form -->
-                <div class="card bg-dark text-white border-0 shadow-lg">
-                    <div class="card-body p-5">
-                        <h2 class="mb-4 fw-bold">Edit Your Story</h2>
-                        <p class="text-secondary mb-5">Refine your thoughts and keep streaming.</p>
+                <!-- MODERN GLASS CARD FOR FORM -->
+                <div class="action-dashboard text-start p-5" style="max-width: 100%;">
+                    <h2 class="mb-4 fw-bold">Edit Your Story</h2>
+                    <p class="text-secondary mb-5">Refine your thoughts and keep streaming.</p>
 
-                        <!-- THE FORM -->
-                        <!-- th:action: Maps to @PostMapping("/save") in your Controller -->
-                        <!-- th:object: Binds the form fields to the existing 'post' object sent by PostService.showEditForm -->
-                        <form th:action="@{/save}" th:object="${post}" method="post">
+                    <!-- THE FORM -->
+                    <form th:action="@{/save}" th:object="${post}" method="post">
 
-                            <!-- HIDDEN ID FIELD: CRITICAL! -->
-                            <!-- This tells the backend WHICH post (ID) to update in the database. -->
-                            <!-- Without this, Hibernate might create a NEW post instead of updating. -->
-                            <input type="hidden" th:field="*{id}">
+                        <!-- HIDDEN ID FIELD -->
+                        <input type="hidden" th:field="*{id}">
 
-                            <!-- AUTHOR FIELD -->
-                            <div class="mb-4">
-                                <label for="author" class="form-label text-secondary small">AUTHOR</label>
-                                <!-- th:field: Pre-fills with current author and allows editing -->
-                                <input type="text" th:field="*{author}" class="form-control" id="author"
-                                    placeholder="Enter your name" required>
-                            </div>
+                        <!-- AUTHOR FIELD -->
+                        <div class="mb-4">
+                            <label for="author" class="form-label text-secondary small fw-bold">AUTHOR</label>
+                            <input type="text" th:field="*{author}" class="form-control netflix-input" id="author"
+                                placeholder="Enter your name" required style="width: 100% !important;">
+                        </div>
 
-                            <!-- TITLE FIELD -->
-                            <div class="mb-4">
-                                <label for="title" class="form-label text-secondary small">TITLE</label>
-                                <!-- th:field: Pre-fills with current title -->
-                                <input type="text" th:field="*{title}" class="form-control" id="title"
-                                    placeholder="Enter post title" required>
-                            </div>
+                        <!-- TITLE FIELD -->
+                        <div class="mb-4">
+                            <label for="title" class="form-label text-secondary small fw-bold">TITLE</label>
+                            <input type="text" th:field="*{title}" class="form-control netflix-input" id="title"
+                                placeholder="Enter post title" required style="width: 100% !important;">
+                        </div>
 
-                            <!-- CONTENT FIELD -->
-                            <div class="mb-5">
-                                <label for="content" class="form-label text-secondary small">STORY CONTENT</label>
-                                <!-- th:field: Pre-fills with current content -->
-                                <textarea th:field="*{content}" class="form-control" id="content" rows="6"
-                                    placeholder="What's on your mind?" required></textarea>
-                            </div>
+                        <!-- CONTENT FIELD -->
+                        <div class="mb-5">
+                            <label for="content" class="form-label text-secondary small fw-bold">STORY CONTENT</label>
+                            <textarea th:field="*{content}" class="form-control netflix-input" id="content" rows="6"
+                                placeholder="What's on your mind?" required
+                                style="width: 100% !important; height: auto !important; padding: 1rem !important;"></textarea>
+                        </div>
 
-                            <!-- FORM ACTIONS -->
-                            <div class="d-grid gap-3">
-                                <!-- UPDATE BUTTON: Submits the changes to the /save route -->
-                                <button type="submit" class="btn btn-netflix btn-lg">Update Post</button>
-
-                                <!-- CANCEL: Return home without saving changes -->
-                                <a href="/"
-                                    class="btn btn-link text-secondary text-decoration-none text-center">Cancel</a>
-                            </div>
-                        </form>
-                    </div>
+                        <!-- FORM ACTIONS -->
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-edit-premium btn-lg">Update Post</button>
+                            <a href="/" class="btn btn-link text-secondary text-decoration-none text-center">Cancel</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

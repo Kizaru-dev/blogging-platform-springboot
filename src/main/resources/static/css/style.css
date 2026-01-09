@@ -1,381 +1,307 @@
 /* ============================================================ */
-/* DESIGN TOKENS (Netflix Aesthetic)                            */
-/* These variables control the core theme of the application.    */
+/* PREMIUM NEON-DARK BLOGGING SYSTEM                            */
 /* ============================================================ */
 :root {
-    --netflix-red: #E50914;
-    /* The iconic Netflix brand red */
-    --netflix-black: #141414;
-    /* Main background color */
-    --netflix-grey: #181818;
-    /* Card and secondary background */
-    --netflix-light-grey: #2f2f2f;
-    /* Border and input highlights */
-    --netflix-white: #e5e5e5;
-    /* Main text color */
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Smooth animations */
+    --neon-red: #ff3131;
+    --neon-red-dark: #b81d24;
+    --neon-red-glow: rgba(255, 49, 49, 0.5);
+    --bg-dark: #050505;
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-muted: #888888;
+    --transition-premium: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Global Styles */
+/* Base Reset & Cinematic Landscape Background */
 body {
-    background-color: var(--netflix-black);
-    color: var(--netflix-white);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('/images/cinematic_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-/* Navigation Bar Styling */
+/* Glassmorphism Utility */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Navbar Tuning */
 .navbar {
-    /* Gradient transition from black to transparent at the top */
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7) 10%, transparent);
-    padding: 1.5rem 4%;
+    background: transparent;
+    padding: 2rem 5%;
 }
 
 .navbar-brand {
-    color: var(--netflix-red) !important;
+    color: var(--neon-red) !important;
     font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: -1px;
+    font-size: 2.2rem;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--neon-red-glow);
 }
 
-/* Custom Netflix-style primary button */
-.btn-netflix {
-    background-color: var(--netflix-red);
-    color: white;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    font-weight: 600;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-.btn-netflix:hover {
-    background-color: #f6121d;
-    color: white;
-    transform: scale(1.05);
-    /* Slight grow effect when hovering */
-}
-
-/* ============================================================ */
-/* POLISHED SEARCH AREA (Netflix Aesthetic)                     */
-/* ============================================================ */
+/* Dashboard Card (Matches Mockup) */
 .action-dashboard {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    margin-bottom: 4rem;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 4rem;
+    max-width: 900px;
+    margin: 2rem auto 5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-dashboard::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
 }
 
 .dashboard-title {
     font-weight: 900;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: white;
-    letter-spacing: -0.5px;
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: -1px;
 }
 
 .dashboard-subtitle {
-    color: #a3a3a3;
-    font-size: 1rem;
-    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    font-weight: 400;
 }
 
+/* Inputs & Buttons Area */
 .id-input-group {
     display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 0;
-    max-width: 800px;
-    align-items: stretch;
 }
 
-.dashboard-input-wrapper {
-    flex: 1;
-    min-width: 300px;
-}
-
-/* Custom Styled Input (Netflix-like) */
 .netflix-input {
-    background-color: rgba(0, 0, 0, 0.75) !important;
-    border: 1px solid #8c8c8c !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid var(--glass-border) !important;
     color: white !important;
     height: 60px !important;
-    padding: 1rem 1.5rem !important;
+    width: 320px !important;
+    border-radius: 12px !important;
+    padding: 0 1.8rem !important;
     font-size: 1.1rem !important;
-    border-radius: 2px 0 0 2px !important;
+    transition: var(--transition-premium) !important;
 }
 
 .netflix-input:focus {
-    border-color: #fff !important;
-    box-shadow: 0 0 0 1px #fff !important;
+    border-color: var(--neon-red) !important;
+    box-shadow: 0 0 20px rgba(255, 49, 49, 0.3) !important;
+    background: rgba(0, 0, 0, 0.6) !important;
 }
 
-/* Remove Number Spinners */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
-}
-
-.dashboard-buttons {
-    display: flex;
-    gap: 1.5rem;
-    /* Added spacing between Edit and Delete buttons */
-}
-
-.btn-netflix-search {
-    background-color: var(--netflix-red);
+/* Action Buttons (Matches Mockup) */
+.btn-edit-premium {
+    background: linear-gradient(135deg, var(--neon-red-dark), var(--neon-red));
     color: white;
     border: none;
     height: 60px;
     padding: 0 2.5rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 0 2px 2px 0;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.btn-netflix-search:hover {
-    background-color: #f6121d;
-    color: white;
-}
-
-.btn-edit-premium {
-    background: linear-gradient(45deg, #4b6cb7, #182848);
-    color: white;
-    border: none;
-    height: 60px;
-    padding: 0 2rem;
-    font-weight: 700;
-    transition: var(--transition);
-    font-size: 1.1rem;
-    margin-left: 1rem;
-    border-radius: 2px;
+    font-weight: 800;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    transition: var(--transition-premium);
+    box-shadow: 0 4px 15px rgba(255, 49, 49, 0.2);
 }
 
 .btn-edit-premium:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(75, 108, 183, 0.5);
-    background: linear-gradient(45deg, #182848, #4b6cb7);
+    box-shadow: 0 8px 25px var(--neon-red-glow);
+    transform: translateY(-3px) scale(1.02);
 }
 
-/* ============================================================ */
-/* TABLE STYLING (Netflix Dark Theme)                          */
-/* ============================================================ */
-/* ============================================================ */
-/* PREMIUM TABLE CONTAINER (Glassmorphism & Deep Rounding)      */
-/* ============================================================ */
+.btn-netflix-search {
+    background: rgba(30, 0, 0, 0.4);
+    color: #ffcccc;
+    border: 1px solid rgba(255, 49, 49, 0.2);
+    height: 60px;
+    padding: 0 2.5rem;
+    font-weight: 700;
+    border-radius: 12px;
+    transition: var(--transition-premium);
+}
+
+.btn-netflix-search:hover {
+    background: rgba(255, 49, 49, 0.15);
+    border-color: var(--neon-red);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* New Post Button (Matches Mockup) */
+.btn-netflix {
+    background: rgba(255, 49, 49, 0.1);
+    border: 1px solid rgba(255, 49, 49, 0.3);
+    color: white;
+    padding: 0.75rem 1.8rem;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: var(--transition-premium);
+}
+
+.btn-netflix:hover {
+    background: var(--neon-red);
+    box-shadow: 0 0 25px var(--neon-red-glow);
+    border-color: var(--neon-red);
+    transform: scale(1.05);
+}
+
+/* Table Design (Premium & Glassy) */
 .netflix-table-container {
-    background: rgba(24, 24, 24, 0.75);
-    /* Semi-transparent for glass effect */
-    backdrop-filter: blur(15px);
-    /* Cinematic blur */
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    /* Subtle glass border */
-    border-radius: 24px;
-    /* Deep rounding for modern look */
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
     padding: 2.5rem;
-    /* More generous room */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    overflow: hidden;
-    margin-bottom: 5rem;
+    margin-top: 3rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .table-netflix {
-    color: var(--netflix-white);
+    color: var(--text-primary);
     border-collapse: separate;
-    border-spacing: 0 20px;
-    /* Even more generous horizontal spacing */
+    border-spacing: 0 16px;
     width: 100%;
 }
 
 .table-netflix thead th {
     border: none !important;
-    color: white !important;
-    /* Brighter header row */
-    font-size: 0.95rem;
-    font-weight: 900;
-    /* "Back font" / Black font style */
+    color: var(--text-muted) !important;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    padding: 1.5rem 1rem;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 1.25rem 1rem;
 }
 
 .table-netflix tbody tr {
-    background: rgba(45, 45, 45, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    /* Row border for definition */
-    transition: var(--transition);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-.table-netflix tbody tr:hover {
-    background-color: rgba(60, 60, 60, 0.9);
-    transform: translateY(-4px) scale(1.01);
-    /* Lift effect on hover */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-}
-
-.table-netflix td {
-    border: none !important;
-    padding: 1.5rem 1rem;
-    vertical-align: middle;
-}
-
-/* Vibrant Title Styling */
-.post-title-vibrant {
-    color: white !important;
-    font-weight: 800;
-    font-size: 1.15rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.table-netflix tr td:first-child {
-    border-radius: 16px 0 0 16px;
-    /* High rounding for row start */
-    padding-left: 2rem;
-}
-
-.table-netflix tr td:last-child {
-    border-radius: 0 16px 16px 0;
-    /* High rounding for row end */
-    padding-right: 2rem;
-}
-
-.id-cell {
-    color: var(--netflix-red);
-    font-weight: 800;
-}
-
-/* ============================================================ */
-/* BLOG CARD STYLING (Legacy - keep for reference)             */
-/* ============================================================ */
-.card-blog {
-    background-color: var(--netflix-grey);
-    border: none;
-    border-radius: 8px;
-    transition: var(--transition);
-    overflow: hidden;
-    height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 18px;
+    transition: var(--transition-premium);
+    position: relative;
     cursor: pointer;
 }
 
-.card-blog:hover {
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+/* Permanent Row Indicator (Matches Mockup) */
+.table-netflix tbody tr::after {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 40%;
+    width: 3px;
+    background: var(--neon-red);
+    border-radius: 4px;
+    opacity: 0.4;
+    box-shadow: 0 0 8px var(--neon-red-glow);
+    transition: var(--transition-premium);
 }
 
-.card-img-top {
-    height: 200px;
-    background: linear-gradient(45deg, #222, #111);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: var(--netflix-light-grey);
+.table-netflix tbody tr:hover::after {
+    height: 60%;
+    opacity: 1;
+    box-shadow: 0 0 15px var(--neon-red-glow);
 }
 
-.card-body {
-    padding: 1.25rem;
+.table-netflix tbody tr:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.005) translateX(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-.card-title {
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+.table-netflix td {
+    padding: 1.5rem 1rem;
+    border: none !important;
+}
+
+.post-title-vibrant {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: -0.5px;
 }
 
 .author-badge {
-    color: var(--netflix-red);
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-    display: block;
-}
-
-.card-text {
-    color: #a3a3a3;
-    font-size: 0.9rem;
-}
-
-/* Form Styles (for Add/Edit Post pages) */
-.form-control,
-.form-textarea {
-    background-color: var(--netflix-light-grey) !important;
-    border: none !important;
-    color: white !important;
-    border-radius: 4px;
-    padding: 0.8rem;
-}
-
-.form-control:focus {
-    /* Glowing effect when user clicks into a field */
-    box-shadow: 0 0 0 0.2rem rgba(229, 9, 20, 0.25) !important;
-}
-
-/* Hero Section (Main Banner on Home page) */
-.hero-section {
-    padding: 5rem 0;
-    /* Dark overlay on background image for text readability */
-    background: linear-gradient(to bottom, rgba(20, 20, 20, 0), var(--netflix-black)),
-        url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-    background-size: cover;
-    background-position: center;
-    margin-top: -80px;
-}
-
-.hero-title {
-    font-size: 3.5rem;
+    color: var(--neon-red);
     font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
 }
 
-/* Hidden actions (Edit/Delete) that show up on card hover */
-.actions-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-    display: flex;
-    justify-content: space-between;
-    opacity: 0;
-    /* Hidden by default */
-    transition: var(--transition);
-}
-
-.card-blog:hover .actions-overlay {
-    opacity: 1;
-    /* Revealed on hover */
-}
-
+/* Table Actions */
 .action-btn {
-    color: #ffffff !important;
-    font-size: 1.45rem;
-    padding: 0.6rem;
-    transition: var(--transition);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.1);
-    text-decoration: none !important;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.4rem;
+    transition: var(--transition-premium);
+    padding: 0.5rem;
+    display: inline-block;
 }
 
 .action-btn:hover {
-    color: var(--netflix-red) !important;
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.15);
+    color: var(--neon-red);
+    transform: scale(1.3);
+}
+
+.text-danger.fas {
+    color: var(--neon-red) !important;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 49, 49, 0.2);
+    border-radius: 10px;
+    border: 3px solid var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-red);
+}
+
+@media (max-width: 992px) {
+    .action-dashboard {
+        padding: 3rem 2rem;
+    }
+
+    .dashboard-title {
+        font-size: 2rem;
+    }
+
+    .netflix-input {
+        width: 100% !important;
+        max-width: 400px;
+    }
 }

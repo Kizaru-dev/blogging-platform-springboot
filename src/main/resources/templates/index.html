@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<!-- xmlns:th="http://www.thymeleaf.org" enables Thymeleaf integration -->
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetflixBlog | Manage Stories</title>
+    <title>DevBlog | Story Manager</title>
 
-    <!-- BOOTSTRAP 5: Responsive framework -->
+    <!-- BOOTSTRAP 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- GOOGLE FONTS & ICONS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- CUSTOM NETFLIX THEME -->
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- CUSTOM THEME (Cache Busted) -->
+    <link rel="stylesheet" th:href="@{/css/style.css?v=2.1}">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid px-lg-5">
-            <a class="navbar-brand" href="/">DevBlog</a>
+            <a class="navbar-brand" href="/">DEVBLOG</a>
             <div class="ms-auto">
                 <a href="/add" class="btn btn-netflix">
                     <i class="fas fa-plus me-2"></i>New Post
@@ -32,29 +31,21 @@
 
     <div class="container-fluid px-lg-5 py-5">
 
-        <!-- ACTION DASHBOARD: Polished Netflix-style search area -->
-        <div class="action-dashboard text-center mb-5">
+        <!-- MODERN ACTION DASHBOARD -->
+        <div class="action-dashboard text-center">
             <h3 class="dashboard-title">Ready to manage your stories?</h3>
             <p class="dashboard-subtitle">Enter a Post ID below to instantly edit or remove a story.</p>
 
-            <div class="d-flex justify-content-center">
-                <div class="id-input-group">
-                    <div class="dashboard-input-wrapper">
-                        <!-- Polished Netflix-style input without spinners -->
-                        <input type="number" id="manualPostId" class="form-control netflix-input"
-                            placeholder="Enter Post ID (e.g. 101)">
-                    </div>
+            <div class="id-input-group">
+                <input type="number" id="manualPostId" class="form-control netflix-input"
+                    placeholder="Enter Post ID (e.g. 101)">
 
-                    <div class="dashboard-buttons">
-                        <!-- Cinematic Search-style buttons -->
-                        <button class="btn btn-edit-premium" type="button" onclick="handleAction('edit')">
-                            Edit Story <i class="fas fa-chevron-right ms-2 small"></i>
-                        </button>
-                        <button class="btn btn-netflix-search" type="button" onclick="handleAction('delete')">
-                            <i class="fas fa-trash-alt me-2"></i>Delete
-                        </button>
-                    </div>
-                </div>
+                <button class="btn btn-edit-premium" type="button" onclick="handleAction('edit')">
+                    Edit Story <i class="fas fa-chevron-right ms-2 small"></i>
+                </button>
+                <button class="btn btn-netflix-search" type="button" onclick="handleAction('delete')">
+                    <i class="fas fa-trash-can me-2"></i>Delete
+                </button>
             </div>
 
             <div id="idErrorMessage" class="text-danger small mt-4" style="display: none;">
@@ -62,61 +53,59 @@
             </div>
         </div>
 
-        <h2 class="mb-4 fw-bold">Active Story Stream</h2>
+        <div class="mt-5">
+            <h2 class="mb-4 fw-bold">Active Story Stream</h2>
 
-        <!-- TABLE VIEW: Comprehensive list of all blog posts -->
-        <div class="netflix-table-container">
-            <table class="table table-netflix align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th width="80">ID</th>
-                        <th>POST TITLE</th>
-                        <th>AUTHOR</th>
-                        <th class="d-none d-md-table-cell">CONTENT PREVIEW</th>
-                        <th width="150">ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- th:each loops over the posts list from the backend -->
-                    <tr th:each="post : ${posts}">
-                        <td class="id-cell" th:text="${post.id}">1</td>
-                        <td class="post-title-vibrant" th:text="${post.title}">My First Blog Post</td>
-                        <td>
-                            <span class="author-badge mb-0" th:text="${post.author}">Author</span>
-                        </td>
-                        <td class="d-none d-md-table-cell text-secondary small">
-                            <!-- Clamps content to one line -->
-                            <div class="text-truncate" style="max-width: 300px;" th:text="${post.content}">
-                                This is a preview of the content...
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex gap-3">
-                                <a th:href="@{/edit/{id}(id=${post.id})}" class="text-white action-btn p-0"
-                                    title="Edit">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a th:href="@{/delete/{id}(id=${post.id})}" class="text-white action-btn p-0"
-                                    title="Delete"
-                                    onclick="return confirm('Wait! Are you sure you want to delete this story?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+            <!-- TABLE VIEW -->
+            <div class="netflix-table-container">
+                <table class="table table-netflix align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th width="80">ID</th>
+                            <th>POST TITLE</th>
+                            <th>AUTHOR</th>
+                            <th class="d-none d-md-table-cell">CONTENT PREVIEW</th>
+                            <th width="120">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="post : ${posts}">
+                            <td class="id-cell fw-bold" th:text="${post.id}">1</td>
+                            <td class="post-title-vibrant" th:text="${post.title}">My First Blog Post</td>
+                            <td>
+                                <span class="author-badge" th:text="${post.author}">Author</span>
+                            </td>
+                            <td class="d-none d-md-table-cell text-secondary small">
+                                <div class="text-truncate" style="max-width: 350px;" th:text="${post.content}">
+                                    This is a preview of the content...
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a th:href="@{/edit/{id}(id=${post.id})}" class="action-btn" title="Edit">
+                                        <i class="fas fa-pen-to-square"></i>
+                                    </a>
+                                    <a th:href="@{/delete/{id}(id=${post.id})}" class="action-btn" title="Delete"
+                                        onclick="return confirm('Wait! Are you sure you want to delete this story?')">
+                                        <i class="fas fa-trash-can text-danger"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
 
-                    <!-- Empty State Row -->
-                    <tr th:if="${#lists.isEmpty(posts)}">
-                        <td colspan="5" class="text-center py-5 text-secondary">
-                            No stories found in the stream. <a href="/add" class="text-white">Create one now.</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <!-- Empty State Row -->
+                        <tr th:if="${#lists.isEmpty(posts)}">
+                            <td colspan="5" class="text-center py-5 text-secondary">
+                                No stories found in the stream. <a href="/add" class="text-white">Create one now.</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT: Logic for the ID-based Action Dashboard -->
+    <!-- JAVASCRIPT -->
     <script>
         function handleAction(type) {
             const idInput = document.getElementById('manualPostId');
